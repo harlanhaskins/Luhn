@@ -8,14 +8,14 @@ printValid :: (Integer, Bool) -> IO ()
 printValid (x, b)
     | b         = message "Valid: " x
     | otherwise = message "Invalid: " x
-    where message s x = putStrLn $ s ++ (show x)
+    where message s x = putStrLn $ s ++ show x
 
 validities :: [Integer] -> [(Integer, Bool)]
 validities = map validity
     where validity x = (x, isValidAccount x)
 
 validAccounts :: [Integer] -> [Integer]
-validAccounts = catMaybes . map validate
+validAccounts = mapMaybe validate
 
 validate :: Integer -> Maybe Integer
 validate x
@@ -35,7 +35,7 @@ integerArguments = catMaybes . maybes
 
 usage = putStrLn "Usage: luhn [-vh] [account ...]"
 version = putStrLn "Haskell Luhn 0.1"
-exit = exitWith ExitSuccess
+exit = exitSuccess
 die = exitWith (ExitFailure 1)
 
 main :: IO ()

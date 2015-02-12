@@ -14,7 +14,7 @@ isValidAccount x = (x `mod` 10) == checkDigit (x `quot` 10)
 -- Takes an incomplete account number and appends
 -- its check digit
 fullAccountNumber :: Integer -> Integer
-fullAccountNumber x = (x * 10) + (checkDigit x)
+fullAccountNumber x = (x * 10) + checkDigit x
 
 -- Shorthand for digits
 numbers :: Integer -> [Integer]

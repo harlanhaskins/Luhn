@@ -10,8 +10,8 @@ integerArguments = catMaybes . maybes
 
 check = fmap (all . isValidAccount)
 
-cardNumbers = fmap (integerArguments . lines) $ cards
+cardNumbers = fmap (integerArguments . lines) cards
 
 cards = readFile "cards.txt"
 
-main = defaultMain [ bgroup "luhn" [ bench "1,000,000,000" $ whnf check $ cardNumbers ] ]
+main = defaultMain [ bgroup "luhn" [ bench "1,000,000,000" $ whnf check cardNumbers ] ]
