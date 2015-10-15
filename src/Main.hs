@@ -4,23 +4,11 @@ import Text.Read
 import Data.Maybe
 import Luhn
 
-printValid :: (Integer, Bool) -> IO ()
-printValid (x, b)
-    | b         = message "Valid: " x
-    | otherwise = message "Invalid: " x
-    where message s x = putStrLn $ s ++ show x
+printValid (x, b) = putStrLn $ (if b then "Valid: " else "Invalid: ") ++ (show x)
 
-validities :: [Integer] -> [(Integer, Bool)]
-validities = map validity
-    where validity x = (x, isValidAccount x)
+validities = map (\x -> (x, isValidAccount x))
 
-validAccounts :: [Integer] -> [Integer]
-validAccounts = mapMaybe validate
-
-validate :: Integer -> Maybe Integer
-validate x
-    | isValidAccount x = Just x
-    | otherwise = Nothing
+validAccounts = filter isValidAccount
 
 parse :: [String] -> IO [Integer]
 parse ["-h"] = usage >> exit
